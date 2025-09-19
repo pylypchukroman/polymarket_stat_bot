@@ -12,13 +12,14 @@
   },
   "dependencies": {
     "@polymarket/clob-client": "^4.20.0",
-    "typescript": "^5.1.6",
     "axios": "^1.11.0",
     "dotenv": "^17.2.1",
     "ethers": "^5.8.0",
     "node-cron": "^4.2.1",
+    "typescript": "^5.1.6",
     "winston": "^3.17.0",
     "winston-slack-webhook-transport": "^2.3.6",
-    "winston-transport": "^4.9.0"
+    "winston-transport": "^4.9.0",
+    "ws": "^8.18.3"
   }
 }

@@ -30,9 +30,27 @@ export class MarketWebSocket {
   }
 
   private onMessage(data: WebSocket.Data): void {
-    const message = data.toString();
-    console.log(message);
-    // Process your market data here
+    const rawData = data.toString();
+
+    // Перевіряємо, чи починається повідомлення з '{'.
+    // Це простий спосіб відрізнити JSON від звичайних текстових повідомлень,
+    // таких як "PONG".
+    if (rawData.startsWith('{')) {
+      try {
+        const message = JSON.parse(rawData);
+
+        if (typeof message === 'object' && message !== null && message.event_type === 'book') {
+          console.log('Received "book" data:', message);
+        } else {
+          // За бажанням, можна ігнорувати інші типи повідомлень
+          console.log(`Ignoring event type: ${message.event_type}`);
+        }
+      } catch (error) {
+        console.error('Failed to parse JSON string:', error);
+      }
+    } else {
+      console.log('Received non-JSON message:', rawData);
+    }
   }
 
   private onError(error: Error): void {

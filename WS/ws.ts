@@ -1,10 +1,14 @@
 import WebSocket from 'ws';
+import { getMarketData } from '../helpers/getMarketData';
+import { MarketSide } from '../types/types';
 
 export class MarketWebSocket {
   private ws: WebSocket;
   private pingInterval: NodeJS.Timeout | null = null;
+  private ids: any;
 
-  constructor(private assetIds: string[]) {
+  constructor(private clobTokenIds: Record<MarketSide, string> | null = null) {
+    this.ids = [clobTokenIds?.Yes, clobTokenIds?.No];
     const url = "wss://ws-subscriptions-clob.polymarket.com/ws/market";
     this.ws = new WebSocket(url);
 
@@ -17,7 +21,7 @@ export class MarketWebSocket {
   private onOpen(): void {
     // Subscribe to market data for specified asset IDs
     this.ws.send(JSON.stringify({
-      assets_ids: this.assetIds,
+      assets_ids: this.ids,
       type: "market"
     }));
 
@@ -31,26 +35,17 @@ export class MarketWebSocket {
 
   private onMessage(data: WebSocket.Data): void {
     const rawData = data.toString();
-
-    // Перевіряємо, чи починається повідомлення з '{'.
-    // Це простий спосіб відрізнити JSON від звичайних текстових повідомлень,
-    // таких як "PONG".
-    if (rawData.startsWith('{')) {
+    if (!rawData.startsWith('{')) return;
       try {
         const message = JSON.parse(rawData);
 
         if (typeof message === 'object' && message !== null && message.event_type === 'book') {
-          console.log('Received "book" data:', message);
-        } else {
-          // За бажанням, можна ігнорувати інші типи повідомлень
-          console.log(`Ignoring event type: ${message.event_type}`);
+          const marketData = getMarketData(message, this.clobTokenIds);
+          console.log(marketData, "DATA");
         }
       } catch (error) {
         console.error('Failed to parse JSON string:', error);
       }
-    } else {
-      console.log('Received non-JSON message:', rawData);
-    }
   }
 
   private onError(error: Error): void {

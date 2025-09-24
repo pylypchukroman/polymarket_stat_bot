@@ -1,8 +1,7 @@
-import { getSlugET } from './getSlugET';
 import axios from 'axios';
+import { slug } from './Data/consts';
 
-export async function fetchMarket(topic: string) {
-  const slug = getSlugET(topic);
+export async function fetchMarket() {
   const url = `https://gamma-api.polymarket.com/markets?slug=${slug}`;
 
   try {

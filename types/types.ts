@@ -15,13 +15,7 @@ export type PriceLevel = {
 
 export type MarketSide = "Yes" | "No";
 
-export type MarketData = {
-  side: MarketSide;
-  price: number;
-  size: number;
-};
-
-export interface PriceData {
+export type PriceData = {
   price: number;
   size: number;
 }

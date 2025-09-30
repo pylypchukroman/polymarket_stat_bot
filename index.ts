@@ -1,9 +1,9 @@
 import { MarketWebSocket } from './WS/ws';
-import { getClobTokenIds } from './getClobTokenIds';
+import { getClobTokenIds } from './helpers/getClobTokenIds';
 import { getMarketData } from './helpers/getMarketData';
 
 
-async function setupSubscriptions() {
+async function main() {
   const clobTokenIds = await getClobTokenIds();
   if (!clobTokenIds) {
     return;
@@ -14,4 +14,4 @@ async function setupSubscriptions() {
 }
 
 
-setupSubscriptions();
+main();

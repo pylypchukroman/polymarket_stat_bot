@@ -1,19 +1,20 @@
 import { connectDB } from './db';
+import { MarketData } from '../types/types';
+import { Db } from 'mongodb';
+import { logger } from '../slack/logger';
 
 
-export async function savePriceUpdate(symbol, price) {
+export async function savePriceUpdate(data: MarketData | null) {
+  if (!data) return;
   try {
-    const db = await connectDB();
-    const collection = db.collection("priceUpdates");
+    const db: Db | undefined = await connectDB();
+    const collection = db.collection("price");
 
     await collection.insertOne({
-      symbol,
-      price,
+      data,
       timestamp: new Date()
     });
-
-    console.log("💾 Price saved:", symbol, price);
   } catch (err) {
-    console.error("❌ Error saving price:", err);
+    logger.error("❌ Error saving price");
   }
 }

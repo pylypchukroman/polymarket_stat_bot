@@ -19,3 +19,9 @@ export type PriceData = {
   price: number;
   size: number;
 }
+
+export type MarketData = {
+  side: MarketSide;
+  price: number;
+  size: number;
+};

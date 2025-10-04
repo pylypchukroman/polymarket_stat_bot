@@ -15,7 +15,11 @@ export const logger = winston.createLogger({
   level: "debug",
   transports: [
     new winston.transports.Console(),
-    makeSlackTransport(process.env.SLACK_ERRORS_WEBHOOK!, "", "error"),
-    makeSlackTransport(process.env.SLACK_UPDATES_WEBHOOK!, "", "info")
+    ...(process.env.SLACK_ERRORS_WEBHOOK
+      ? [makeSlackTransport(process.env.SLACK_ERRORS_WEBHOOK, "[ERROR]", "error")]
+      : []),
+    ...(process.env.SLACK_UPDATES_WEBHOOK
+      ? [makeSlackTransport(process.env.SLACK_UPDATES_WEBHOOK, "[UPDATE]", "info")]
+      : []),
   ],
 });

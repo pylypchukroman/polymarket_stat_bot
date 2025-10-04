@@ -8,7 +8,6 @@ async function main() {
   if (!clobTokenIds) {
     return;
   }
-  const ids = [clobTokenIds.Yes, clobTokenIds.No];
 
   new MarketWebSocket(clobTokenIds);
 }

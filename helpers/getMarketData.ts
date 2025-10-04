@@ -1,5 +1,6 @@
-import { BookEvent, MarketSide, PriceData } from '../types/types';
+import { BookEvent, MarketData, MarketSide, PriceData } from '../types/types';
 import { getCurrentPrice } from './getCurrentPrice';
+import { getNormalizedPrice } from './getNormalizedPrice';
 
 export let prices: Record<MarketSide, PriceData | null> = {
   Yes: null,
@@ -8,9 +9,9 @@ export let prices: Record<MarketSide, PriceData | null> = {
 
 export function getMarketData(
   e: BookEvent,
-  clobTokenIds: any
-): Record<MarketSide, PriceData | null> | null {
-
+  clobTokenIds: Record<MarketSide, string> | null
+): MarketData | null {
+  if(!clobTokenIds) return null;
   const side: MarketSide | null = e.asset_id === clobTokenIds.Yes
     ? "Yes"
     : e.asset_id === clobTokenIds.No
@@ -24,6 +25,7 @@ export function getMarketData(
 
   const currentPrice = getCurrentPrice(bids, asks);
   prices[side] = currentPrice;
+  const normalizedPrice = getNormalizedPrice(prices);
 
-  return prices;
+  return normalizedPrice;
 }

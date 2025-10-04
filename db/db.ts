@@ -1,14 +1,22 @@
-import { MongoClient } from "mongodb";
+import { Db, MongoClient } from "mongodb";
+import { logger } from '../slack/logger';
 
-const uri = "";
+
+const uri: string = process.env.MONGO_DB_URI as string;
 const client = new MongoClient(uri);
 
-export async function connectDB() {
+let db: Db | null = null;
+
+export async function connectDB(): Promise<Db> {
+  if (db) return db;
+
   try {
     await client.connect();
-    console.log("✅ Connected to MongoDB");
-    return client.db("myBotDB");
+    db = client.db("myBotDB");
+    logger.info("✅ Connected to MongoDB");
+    return db;
   } catch (err) {
-    console.error("❌ Error connecting to MongoDB:", err);
+    logger.error("❌ Error connecting to MongoDB");
+    throw new Error("MongoDB connection failed");
   }
 }

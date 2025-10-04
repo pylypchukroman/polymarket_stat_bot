@@ -1,11 +1,13 @@
 import WebSocket from 'ws';
 import { getMarketData } from '../helpers/getMarketData';
 import { MarketSide } from '../types/types';
+import { savePriceUpdate } from '../db/priceService';
+import { logger } from '../slack/logger';
 
 export class MarketWebSocket {
   private ws: WebSocket;
   private pingInterval: NodeJS.Timeout | null = null;
-  private ids: any;
+  private ids: (string | undefined)[];
 
   constructor(private clobTokenIds: Record<MarketSide, string> | null = null) {
     this.ids = [clobTokenIds?.Yes, clobTokenIds?.No];
@@ -41,19 +43,19 @@ export class MarketWebSocket {
 
         if (typeof message === 'object' && message !== null && message.event_type === 'book') {
           const marketData = getMarketData(message, this.clobTokenIds);
-          console.log(marketData, "DATA");
+          // savePriceUpdate(marketData);
         }
       } catch (error) {
-        console.error('Failed to parse JSON string:', error);
+        logger.error('Failed to parse JSON string');
       }
   }
 
   private onError(error: Error): void {
-    console.log("Error: ", error);
+    logger.error('WS Error');
   }
 
   private onClose(): void {
-    console.log("Connection closed");
+    logger.info("Connection closed");
     if (this.pingInterval) {
       clearInterval(this.pingInterval);
     }

@@ -40,7 +40,6 @@ export class MarketWebSocket {
         const message = JSON.parse(rawData);
         if (typeof message === 'object' && message !== null && message.event_type === 'book') {
           const marketData = getMarketData(message, this.clobTokenIds);
-          console.log(marketData)
           savePriceUpdate(marketData);
         }
       } catch (error) {

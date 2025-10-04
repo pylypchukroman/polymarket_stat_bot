@@ -1,1 +1,2 @@
-export const slug = "bitcoin-up-or-down-october-4-1am-et";
+export const slug = "";
+export const FLUSH_INTERVAL = 20000;

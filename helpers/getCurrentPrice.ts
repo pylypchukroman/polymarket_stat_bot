@@ -1,4 +1,5 @@
-import { PriceData } from '../types/types';
+import { PriceData } from '../types/interfaces';
+
 
 export function getCurrentPrice(
   bids: PriceData[],

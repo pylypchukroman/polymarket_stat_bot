@@ -13,7 +13,6 @@ export class MarketWebSocket {
     this.ids = [clobTokenIds?.Yes, clobTokenIds?.No];
     const url = "wss://ws-subscriptions-clob.polymarket.com/ws/market";
     this.ws = new WebSocket(url);
-
     this.ws.on('open', this.onOpen.bind(this));
     this.ws.on('message', this.onMessage.bind(this));
     this.ws.on('error', this.onError.bind(this));
@@ -21,13 +20,11 @@ export class MarketWebSocket {
   }
 
   private onOpen(): void {
-    // Subscribe to market data for specified asset IDs
     this.ws.send(JSON.stringify({
       assets_ids: this.ids,
       type: "market"
     }));
 
-    // Start ping to keep connection alive
     this.pingInterval = setInterval(() => {
       if (this.ws.readyState === WebSocket.OPEN) {
         this.ws.send("PING");
@@ -38,12 +35,13 @@ export class MarketWebSocket {
   private onMessage(data: WebSocket.Data): void {
     const rawData = data.toString();
     if (!rawData.startsWith('{')) return;
+
       try {
         const message = JSON.parse(rawData);
-
         if (typeof message === 'object' && message !== null && message.event_type === 'book') {
           const marketData = getMarketData(message, this.clobTokenIds);
-          // savePriceUpdate(marketData);
+          console.log(marketData)
+          savePriceUpdate(marketData);
         }
       } catch (error) {
         logger.error('Failed to parse JSON string');

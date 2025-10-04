@@ -5,7 +5,6 @@ export async function getClobTokenIds(): Promise<{ Yes: string; No: string } | n
 
   if (market) {
     const first = JSON.parse([...market][0].clobTokenIds);
-
     if (first.length >= 2) {
       return {
         Yes: first[0],
@@ -13,6 +12,5 @@ export async function getClobTokenIds(): Promise<{ Yes: string; No: string } | n
       };
     }
   }
-
   return null;
 }

@@ -1,4 +1,5 @@
-import { MarketData, MarketSide, PriceData } from '../types/types';
+import { MarketSide} from '../types/types';
+import { MarketData, PriceData } from '../types/interfaces';
 
 let lastPrice: number | null = null;
 
@@ -11,7 +12,6 @@ export function getNormalizedPrice(
     data.Yes.price > data.No.price
       ? { side: "Yes", ...data.Yes }
       : { side: "No", ...data.No };
-
   if (lastPrice === normalized.price) {
     return null;
   }

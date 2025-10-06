@@ -39,13 +39,19 @@ Add the connection string and Slack webhooks to .env:
 ## Database Structure
 
 Data is stored in the `prices` collection:
-`{
+`{`  
+
     "_id": "68e19beefca707659e3989d3",
-    "side": "No",
-    "price": 0.52,
-    "size": 20,
-    "timestamp": "2025-10-04T22:13:01.882Z"
-}`
+
+    "side": "No",  
+
+    "price": 0.52,  
+
+    "size": 20,  
+
+    "timestamp": "2025-10-04T22:13:01.882Z"  
+
+`}`
 
 Fields:
 
@@ -63,36 +69,49 @@ timestamp (ISODate) — time when the data was received from Polymarket.
 
 Before running, specify the market and data collection interval in the `consts.ts` file:
 
-`slug = "bitcoin-up-or-down-october-6-1am-et"; // Polymarket market slug
-FLUSH_INTERVAL = 20000; // batch interval in ms for saving data to MongoDB`
+`slug = "bitcoin-up-or-down-october-6-1am-et"; // Polymarket market slug`  
+
+`FLUSH_INTERVAL = 20000; // batch interval in ms for saving data to MongoDB`
 
 ## How to get the slug
 
 You can get the slug from the browser address bar when a specific market is open on Polymarket.
 
-For example: `https://polymarket.com/event/bitcoin-up-or-down-october-6-1am-et?tid=1759732963282`
-Here, slug = `bitcoin-up-or-down-october-6-1am-et`
-slug — identifier of the market on Polymarket (located after /event/ and before ? or the end of the URL).
+For example: `https://polymarket.com/event/bitcoin-up-or-down-october-6-1am-et?tid=1759732963282`  
+
+Here, slug = `bitcoin-up-or-down-october-6-1am-et`  
+
+slug — identifier of the market on Polymarket (located after `/event/` and before `?` or the end of the URL).  
+
 FLUSH_INTERVAL — time in milliseconds to batch collected data before saving to MongoDB (reduces database load).
 
 ## Slack Integration
 
 The app can send messages to Slack.
 
-Message types:
-info (SLACK_UPDATES_WEBHOOK) — updates about price changes.
+Message types:  
+
+info (SLACK_UPDATES_WEBHOOK) — updates about price changes.  
+
 error (SLACK_ERRORS_WEBHOOK) — error notifications from the bot.
 
 How to set up:
-Create a Slack channel.
-Add a bot via Incoming Webhooks
-Insert webhook URLs into .env (see above).
-`SLACK_ERRORS_WEBHOOK=https://hooks.slack.com/services/XXX/YYY/ZZZ
-SLACK_UPDATES_WEBHOOK=https://hooks.slack.com/services/AAA/BBB/CCC`
+Create a Slack channel.  
+
+Add a bot via Incoming Webhooks  
+
+Insert webhook URLs into .env (see above).  
+
+`SLACK_ERRORS_WEBHOOK=https://hooks.slack.com/services/XXX/YYY/ZZZ`  
+
+`SLACK_UPDATES_WEBHOOK=https://hooks.slack.com/services/AAA/BBB/CCC`
 
 ## Future Plans
 
-Add REST API to retrieve price history.
-Build trend graphs.
-Support monitoring multiple markets simultaneously.
+Add REST API to retrieve price history.  
+
+Build trend graphs.  
+
+Support monitoring multiple markets simultaneously.  
+
 Extended integration with other prediction markets.

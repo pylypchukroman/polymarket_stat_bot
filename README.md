@@ -54,15 +54,15 @@ Data is stored in the `prices` collection:
 
 Fields:
 
-_id (ObjectId) — unique identifier for the record.  
+- _id (ObjectId) — unique identifier for the record.  
 
-side (string) — market side, "Yes" or "No".  
+- side (string) — market side, "Yes" or "No".  
 
-price (number) — price at the time of the record.  
+- price (number) — price at the time of the record.  
 
-size (number) — order size (number of contracts).  
+- size (number) — order size (number of contracts).  
 
-timestamp (ISODate) — time when the data was received from Polymarket.
+- timestamp (ISODate) — time when the data was received from Polymarket.
 
 ## Usage
 
@@ -76,9 +76,9 @@ Before running, specify the market and data collection interval in the `consts.t
 
 You can get the slug from the browser address bar when a specific market is open on Polymarket.
 
-For example: `https://polymarket.com/event/bitcoin-up-or-down-october-6-1am-et?tid=1759732963282`  
+For example: `https://polymarket.com/event/will-apple-release-a-new-product-line-in-2025?tid=1759736272510`  
 
-Here, slug = `bitcoin-up-or-down-october-6-1am-et`  
+Here, slug = `will-apple-release-a-new-product-line-in-2025`  
 
 slug — identifier of the market on Polymarket (located after `/event/` and before `?` or the end of the URL).  
 

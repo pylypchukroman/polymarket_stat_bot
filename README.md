@@ -29,16 +29,18 @@ This application allows you to collect and store statistics from **binary market
 
 ## Database Setup
 
-Before running the application, prepare MongoDB:
-Create a database named `statistic`.
-Inside it, create a collection `prices`.
-Add the connection string and Slack webhooks to .env:
+Before running the application, prepare MongoDB:  
+
+- Create a database named `statistic`.
+- Inside it, create a collection `prices`.
+- Add the connection string and Slack webhooks to .env:
 
 `MONGODB_URI=mongodb+srv://username:password@cluster0.mongodb.net/statistic`
 
 ## Database Structure
 
-Data is stored in the `prices` collection:
+Data is stored in the `prices` collection:  
+
 `{`  
 
     "_id": "68e19beefca707659e3989d3",
@@ -51,7 +53,8 @@ Data is stored in the `prices` collection:
 
     "timestamp": "2025-10-04T22:13:01.882Z"  
 
-`}`
+`}`  
+
 
 Fields:
 

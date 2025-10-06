@@ -41,9 +41,7 @@ Before running the application, prepare MongoDB:
 
 Data is stored in the `prices` collection:  
 
-`{`  
-
-    "_id": "68e19beefca707659e3989d3",
+    { "_id": "68e19beefca707659e3989d3",
 
     "side": "No",  
 
@@ -51,9 +49,7 @@ Data is stored in the `prices` collection:
 
     "size": 20,  
 
-    "timestamp": "2025-10-04T22:13:01.882Z"  
-
-`}`  
+    "timestamp": "2025-10-04T22:13:01.882Z" }
 
 
 Fields:

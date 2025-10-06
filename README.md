@@ -18,20 +18,20 @@ This application allows you to collect and store statistics from **binary market
 
 ## Installation
 
-# Clone the repository
+### Clone the repository
 `git clone https://github.com/your-username/polymarket-stats-collector.git`
 
-# Go to the project folder
+### Go to the project folder
 `cd polymarket-stats-collector`
 
-# Install dependencies
+### Install dependencies
 `npm install`
 
 ## Database Setup
 
 Before running the application, prepare MongoDB:
-Create a database named statistic.
-Inside it, create a collection prices.
+Create a database named `statistic`.
+Inside it, create a collection `prices`.
 Add the connection string and Slack webhooks to .env:
 
 `MONGODB_URI=mongodb+srv://username:password@cluster0.mongodb.net/statistic`
@@ -49,18 +49,22 @@ Data is stored in the `prices` collection:
 
 Fields:
 
-_id (ObjectId) — unique identifier for the record.
-side (string) — market side, "Yes" or "No".
-price (number) — price at the time of the record.
-size (number) — order size (number of contracts).
+_id (ObjectId) — unique identifier for the record.  
+
+side (string) — market side, "Yes" or "No".  
+
+price (number) — price at the time of the record.  
+
+size (number) — order size (number of contracts).  
+
 timestamp (ISODate) — time when the data was received from Polymarket.
 
 ## Usage
 
 Before running, specify the market and data collection interval in the `consts.ts` file:
 
-`export const slug = "bitcoin-up-or-down-october-6-1am-et"; // Polymarket market slug
-export const FLUSH_INTERVAL = 20000; // batch interval in ms for saving data to MongoDB`
+`slug = "bitcoin-up-or-down-october-6-1am-et"; // Polymarket market slug
+FLUSH_INTERVAL = 20000; // batch interval in ms for saving data to MongoDB`
 
 ## How to get the slug
 

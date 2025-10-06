@@ -88,13 +88,16 @@ FLUSH_INTERVAL — time in milliseconds to batch collected data before saving to
 
 The app can send messages to Slack.
 
+
 Message types:  
 
-info (SLACK_UPDATES_WEBHOOK) — updates about price changes.  
+info (SLACK_UPDATES_WEBHOOK) — any updates.  
 
 error (SLACK_ERRORS_WEBHOOK) — error notifications from the bot.
 
-How to set up:
+
+How to set up:  
+
 Create a Slack channel.  
 
 Add a bot via Incoming Webhooks  

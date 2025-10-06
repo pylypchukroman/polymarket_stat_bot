@@ -68,7 +68,7 @@ Fields:
 
 Before running, specify the market and data collection interval in the `consts.ts` file:
 
-`slug = "bitcoin-up-or-down-october-6-1am-et"; // Polymarket market slug`  
+`slug = "will-apple-release-a-new-product-line-in-2025"; // Polymarket market slug`  
 
 `FLUSH_INTERVAL = 20000; // batch interval in ms for saving data to MongoDB`
 

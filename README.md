@@ -117,3 +117,8 @@ Build trend graphs.
 Support monitoring multiple markets simultaneously.  
 
 Extended integration with other prediction markets.
+
+# **Disclaimer / Legal Notice**    
+
+This project collects and analyzes data from Polymarket for **educational and informational purposes only**.  
+No real-money betting or trading is performed, in compliance with Australian regulations.
